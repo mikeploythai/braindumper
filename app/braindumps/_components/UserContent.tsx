@@ -1,41 +1,40 @@
-import { Session, SupabaseClient } from "@supabase/supabase-js";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-
-dayjs.extend(relativeTime);
+import { SupabaseClient, User } from "@supabase/supabase-js";
+import Card from "./Card";
 
 type UserContentProps = {
   supabase: SupabaseClient<any, "public", any>;
-  session: Session | null;
+  user: User;
 };
 
 export default async function UserContent({
   supabase,
-  session,
+  user,
 }: UserContentProps) {
-  const user = session?.user;
-  const { data: userData } = await supabase
-    .from("profiles")
-    .select("full_name, avatar_url")
-    .eq("id", user?.id)
-    .single();
-  const { data: brainDumps } = await supabase
+  const { data, error } = await supabase
     .from("braindumps")
     .select("id, updated_at, title, dump")
-    .eq("owner_id", user?.id);
+    .eq("owner_id", user.id);
+
+  if (error) {
+    return (
+      <div className="flex flex-col gap-2 rounded-md border-2 border-dashed border-red-500 bg-red-100 p-4">
+        <code className="font-semibold">{`Error code: ${error?.code}`}</code>
+        <code>{error?.message}</code>
+        <hr className="border-t-2 border-dashed border-red-500" />
+        <code className="text-sm">Please share this with an engineer!</code>
+      </div>
+    );
+  }
+
+  if (!data?.length) {
+    return <p>You have no braindumps! 👎</p>;
+  }
 
   return (
-    <>
-      <h1>{userData?.full_name}</h1>
-      {brainDumps?.map(({ id, updated_at, title, dump }) => {
-        return (
-          <article key={id}>
-            <h1>{title}</h1>
-            <p className="line-clamp-4">{dump}</p>
-            <small>Last updated {dayjs(updated_at).fromNow()}</small>
-          </article>
-        );
+    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+      {data.map((data) => {
+        return <Card key={data.id} data={data} />;
       })}
-    </>
+    </div>
   );
 }
