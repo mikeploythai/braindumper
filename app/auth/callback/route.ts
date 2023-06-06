@@ -1,5 +1,4 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -11,8 +10,6 @@ export async function GET(req: NextRequest) {
   if (code) {
     await supabase.auth.exchangeCodeForSession(code);
   }
-
-  revalidatePath(req.url);
 
   return NextResponse.redirect(new URL("/braindumps", req.url));
 }
