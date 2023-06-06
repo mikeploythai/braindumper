@@ -9,13 +9,9 @@ import { useEffect } from "react";
 export default function AuthForm() {
   const supabase = createClientComponentClient();
   const router = useRouter();
-  const liveUrl = `https://${
-    process.env.NEXT_PUBLIC_DOMAIN_URL ?? process.env.NEXT_PUBLIC_VERCEL_URL
-  }`;
-  const origin =
-    process.env.NEXT_PUBLIC_DOMAIN_URL || process.env.NEXT_PUBLIC_VERCEL_URL
-      ? liveUrl
-      : "http://localhost:3000";
+  const origin = process.env.NEXT_PUBLIC_DOMAIN_URL
+    ? `https://${process.env.NEXT_PUBLIC_DOMAIN_URL}`
+    : "http://localhost:3000";
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, _) => {
