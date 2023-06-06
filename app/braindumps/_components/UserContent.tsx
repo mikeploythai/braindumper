@@ -1,5 +1,5 @@
 import { SupabaseClient, User } from "@supabase/supabase-js";
-import Card from "./Card";
+import Dump from "./Dump";
 
 type UserContentProps = {
   supabase: SupabaseClient<any, "public", any>;
@@ -32,8 +32,8 @@ export default async function UserContent({
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-      {data.map((data) => {
-        return <Card key={data.id} data={data} />;
+      {data.reverse().map((data) => {
+        return <Dump key={data.id} data={data} />;
       })}
     </div>
   );
