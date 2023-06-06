@@ -9,9 +9,6 @@ I do wanna build upon this and make it a real SaaS, but for the time being, this
 #### Screenshots (06/06/2023)
 
 <img width="1479" alt="Screenshot 2023-06-06 at 12 20 24 AM" src="https://github.com/mploythai/braindumper/assets/110638329/29bc492c-3471-432e-841f-17fbe8d4eacb">
-
 <img width="1479" alt="Screenshot 2023-06-06 at 12 20 30 AM" src="https://github.com/mploythai/braindumper/assets/110638329/6ff2498a-bf59-4109-9c50-18ecae2b995d">
-
 <img width="612" alt="Screenshot 2023-06-06 at 12 20 34 AM" src="https://github.com/mploythai/braindumper/assets/110638329/eb06b37b-9a00-4abc-a747-5897943a8ba0">
-
 <img width="612" alt="Screenshot 2023-06-06 at 12 20 44 AM" src="https://github.com/mploythai/braindumper/assets/110638329/a10cb267-994a-464b-913f-a2af7b205408">
